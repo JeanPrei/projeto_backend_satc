@@ -13,7 +13,7 @@ Representa um produto armazenado e transportado pela empresa.
 |---|---|---|---|---|
 | `id` | `int` | `id` | sim | Gerado pelo banco |
 | `nome` | `str` | `nome` | sim | Até 100 caracteres |
-| `codigo` | `str` | `codigo` | sim | Até 30 caracteres. Único |
+| `codigo` | `str` | `codigo` | não | Até 30 caracteres. Único |
 | `descricao` | `str` | `descricao` | não | Texto livre |
 | `preco` | `Decimal` | `preco` | sim | Maior ou igual a zero |
 
