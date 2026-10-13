@@ -1,9 +1,17 @@
+
 from fastapi import FastAPI
 
+from app.controller.produto import router as produto_router
 
-app = FastAPI(title="Logística e Cadeia de Suprimentos - Projeto Backend SATC", version="1.0.0")
+
+app = FastAPI(
+    title="Logística e Cadeia de Suprimentos - Projeto Backend SATC",
+    version="1.0.0",
+)
+
+app.include_router(produto_router)
 
 
 @app.get("/health")
 def health_check() -> dict[str, str]:
-	return {"status": "ok"}
+    return {"status": "ok"}
