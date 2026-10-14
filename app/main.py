@@ -1,7 +1,7 @@
-
 from fastapi import FastAPI
 
 from app.controller.produto import router as produto_router
+from app.controller.estoque import router as estoque_router
 
 
 app = FastAPI(
@@ -10,6 +10,7 @@ app = FastAPI(
 )
 
 app.include_router(produto_router)
+app.include_router(estoque_router)
 
 
 @app.get("/health")
