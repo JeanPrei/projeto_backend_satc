@@ -1,20 +1,34 @@
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class RastreamentoCreate(BaseModel):
-    entrega_id: int
-    localizacao: str
+    entrega_id: int = Field(gt=0)
+    localizacao: str = Field(min_length=1, max_length=200)
     data_hora: datetime
     observacao: str | None = None
 
+    @field_validator("localizacao")
+    @classmethod
+    def validar_localizacao(cls, valor: str) -> str:
+        valor = valor.strip()
 
-class RastreamentoUpdate(BaseModel):
-    entrega_id: int | None = None
-    localizacao: str | None = None
-    data_hora: datetime | None = None
-    observacao: str | None = None
+        if not valor:
+            raise ValueError("A localização não pode ficar vazia.")
+
+        return valor
+
+    @field_validator("observacao")
+    @classmethod
+    def validar_observacao(cls, valor: str | None) -> str | None:
+        if valor is not None:
+            valor = valor.strip()
+
+            if not valor:
+                return None
+
+        return valor
 
 
 class RastreamentoRead(BaseModel):
